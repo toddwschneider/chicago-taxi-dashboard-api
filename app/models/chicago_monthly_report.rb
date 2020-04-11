@@ -551,6 +551,20 @@ class ChicagoMonthlyReport < ApplicationRecord
     taxi_dashboard_data.merge(tnp_dashboard_data)
   end
 
+  def self.daily_trips(start_date:, end_date:, resource:)
+    sql = <<-SQL
+      SELECT
+        date_trunc_ymd(trip_start_timestamp) AS date,
+        count(*) AS trips
+      WHERE trip_start_timestamp >= #{connection.quote(start_date)}
+        AND trip_start_timestamp < #{connection.quote(end_date + 1.day)}
+      GROUP BY date
+      ORDER BY date
+    SQL
+
+    socrata_query(sql: sql, resource: resource)
+  end
+
   private
 
   def self.socrata_query(sql:, resource:, shared_status: nil, timeout: 360)
