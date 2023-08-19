@@ -9,7 +9,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clockwork', '~> 2.0'
 gem 'delayed_job_active_record', '~> 4.1'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.6'
 gem 'rack-cors', '~> 1.0'
 gem 'rest-client', '~> 2.1'
 
